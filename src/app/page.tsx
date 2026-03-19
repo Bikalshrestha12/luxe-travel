@@ -1,65 +1,352 @@
-import Image from "next/image";
+"use client";
+import dynamic from "next/dynamic";
+import { HeroOverlay } from "@/components/home/HeroOverlay";
+import { FeaturedDestinations } from "@/components/home/FeaturedDestinations";
+import { StatsSection } from "@/components/home/StatsSection";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
-export default function Home() {
+const HeroScene = dynamic(
+  () => import("@/components/home/HeroScene").then((m) => m.HeroScene),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className="absolute inset-0"
+        style={{ background: "var(--obsidian)" }}
+      />
+    ),
+  },
+);
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      <section
+        className="relative min-h-screen overflow-hidden"
+        style={{ background: "var(--obsidian)" }}
+      >
+        <div
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 70% 50%, transparent 0%, rgba(2,2,10,0.6) 100%)",
+          }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+        <div className="absolute inset-0 bg-grid opacity-30 z-[1] pointer-events-none" />
+        <HeroScene />
+        <HeroOverlay />
+      </section>
+
+      <div
+        className="relative overflow-hidden py-5 border-y"
+        style={{
+          borderColor: "rgba(200,146,15,0.1)",
+          background: "rgba(200,146,15,0.03)",
+        }}
+      >
+        <motion.div
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="flex whitespace-nowrap"
+        >
+          {[...Array(2)].map((_, i) => (
+            <div key={i} className="flex items-center gap-12 mr-12">
+              {[
+                "Santorini",
+                "Kyoto",
+                "Maldives",
+                "Patagonia",
+                "Amalfi Coast",
+                "Bali",
+                "Iceland",
+                "Dubai",
+                "Morocco",
+                "New Zealand",
+              ].map((dest) => (
+                <span
+                  key={dest}
+                  className="flex items-center gap-4 text-sm tracking-[0.2em] uppercase"
+                  style={{ color: "var(--text-muted)" }}
+                >
+                  <span style={{ color: "var(--gold)", fontSize: "8px" }}>
+                    ◆
+                  </span>
+                  {dest}
+                </span>
+              ))}
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      <FeaturedDestinations />
+
+      <section className="relative py-32">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="section-divider mb-4" />
+              <p
+                className="text-xs tracking-[0.3em] uppercase mb-4"
+                style={{ color: "var(--gold)" }}
+              >
+                Why LUXE
+              </p>
+              <h2
+                className="text-5xl lg:text-6xl font-light mb-8"
+                style={{
+                  fontFamily: "var(--font-cormorant)",
+                  lineHeight: 0.95,
+                }}
+              >
+                Travel Reimagined
+                <br />
+                <em
+                  className="text-gradient-gold"
+                  style={{ fontStyle: "italic" }}
+                >
+                  For You
+                </em>
+              </h2>
+              <p
+                className="text-base leading-relaxed mb-12"
+                style={{ color: "var(--text-secondary)", fontWeight: 300 }}
+              >
+                We blend cutting-edge AI technology with decades of luxury
+                travel expertise to craft experiences that transcend the
+                ordinary.
+              </p>
+              <div className="grid grid-cols-2 gap-6">
+                {[
+                  {
+                    icon: "✦",
+                    title: "AI-Powered Planning",
+                    desc: "Personalised itineraries generated by advanced AI",
+                  },
+                  {
+                    icon: "◈",
+                    title: "24/7 Concierge",
+                    desc: "Round-the-clock support wherever you are",
+                  },
+                  {
+                    icon: "⬡",
+                    title: "Best Price Guarantee",
+                    desc: "We match any lower price you find",
+                  },
+                  {
+                    icon: "◉",
+                    title: "Exclusive Access",
+                    desc: "Hidden gems and private venues unreachable alone",
+                  },
+                ].map(({ icon, title, desc }) => (
+                  <motion.div
+                    key={title}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7 }}
+                    className="rounded-2xl p-6"
+                    style={{
+                      background: "rgba(200,146,15,0.04)",
+                      border: "1px solid rgba(200,146,15,0.08)",
+                    }}
+                  >
+                    <div
+                      className="text-xl mb-3"
+                      style={{ color: "var(--gold)" }}
+                    >
+                      {icon}
+                    </div>
+                    <div className="font-medium mb-2 text-sm">{title}</div>
+                    <div
+                      className="text-xs leading-relaxed"
+                      style={{ color: "var(--text-muted)" }}
+                    >
+                      {desc}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+            <div className="relative">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                className="relative rounded-3xl overflow-hidden"
+                style={{ height: "600px" }}
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=900&q=80"
+                  alt="Luxury travel"
+                  className="w-full h-full object-cover"
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(2,2,10,0.6) 0%, transparent 60%)",
+                  }}
+                />
+                <div className="absolute bottom-8 left-8 right-8 glass rounded-2xl p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div
+                        className="text-xs"
+                        style={{ color: "var(--text-muted)" }}
+                      >
+                        Next Available Journey
+                      </div>
+                      <div className="font-medium mt-1">
+                        Maldives Overwater Retreat
+                      </div>
+                      <div
+                        className="text-sm mt-1"
+                        style={{ color: "var(--gold-light)" }}
+                      >
+                        Departing in 3 days · 2 seats left
+                      </div>
+                    </div>
+                    <Link
+                      href="/booking"
+                      className="px-5 py-2.5 rounded-full text-sm font-medium"
+                      style={{
+                        background: "linear-gradient(135deg, #c8920f, #e4b020)",
+                        color: "#02020a",
+                      }}
+                    >
+                      Book
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+              <div
+                className="absolute -top-8 -right-8 w-48 h-48 rounded-full border opacity-20 animate-rotate-slow"
+                style={{ borderColor: "var(--gold)" }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <StatsSection />
+
+      <section className="relative py-24">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            className="relative rounded-3xl overflow-hidden p-12 lg:p-20 text-center"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(200,146,15,0.1) 50%, rgba(0,212,255,0.1) 100%)",
+              border: "1px solid rgba(200,146,15,0.15)",
+            }}
+          >
+            <div className="absolute inset-0 bg-grid opacity-30" />
+            <div className="relative z-10">
+              <span className="tag mb-6 inline-flex">
+                <span
+                  className="w-1.5 h-1.5 rounded-full mr-2 animate-pulse inline-block"
+                  style={{ background: "#7c3aed" }}
+                />
+                Powered by AI
+              </span>
+              <h2
+                className="text-5xl lg:text-7xl font-light mb-6"
+                style={{
+                  fontFamily: "var(--font-cormorant)",
+                  lineHeight: 0.95,
+                }}
+              >
+                Let AI Plan Your
+                <br />
+                <em
+                  className="text-gradient-aurora"
+                  style={{ fontStyle: "italic" }}
+                >
+                  Perfect Journey
+                </em>
+              </h2>
+              <p
+                className="text-lg max-w-2xl mx-auto mb-10"
+                style={{ color: "var(--text-secondary)", fontWeight: 300 }}
+              >
+                Describe your dream vacation. Our AI crafts a bespoke itinerary
+                with hotels, flights, and experiences tailored to your exact
+                preferences.
+              </p>
+              <Link href="/ai-planner">
+                <motion.button
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="px-10 py-4 rounded-full text-base font-medium"
+                  style={{
+                    background: "linear-gradient(135deg, #7c3aed, #c8920f)",
+                    color: "#fff",
+                  }}
+                >
+                  Start AI Planning — It&apos;s Free
+                </motion.button>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <TestimonialsSection />
+
+      <section className="relative py-32 text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2
+            className="text-6xl lg:text-8xl font-light mb-8"
+            style={{ fontFamily: "var(--font-cormorant)", lineHeight: 0.9 }}
+          >
+            Ready to
+            <br />
+            <em className="text-gradient-gold" style={{ fontStyle: "italic" }}>
+              Explore?
+            </em>
+          </h2>
+          <p
+            className="text-lg mb-12"
+            style={{ color: "var(--text-secondary)", fontWeight: 300 }}
+          >
+            Your extraordinary journey awaits.
           </p>
+          <div className="flex flex-wrap justify-center gap-5">
+            <Link href="/destinations">
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                className="px-10 py-4 rounded-full text-base font-medium"
+                style={{
+                  background: "linear-gradient(135deg, #c8920f, #e4b020)",
+                  color: "#02020a",
+                }}
+              >
+                Explore Destinations
+              </motion.button>
+            </Link>
+            <Link href="/contact">
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                className="px-10 py-4 rounded-full text-base font-medium border"
+                style={{
+                  borderColor: "rgba(200,146,15,0.3)",
+                  color: "var(--gold-light)",
+                }}
+              >
+                Talk to an Expert
+              </motion.button>
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+    </>
   );
 }
