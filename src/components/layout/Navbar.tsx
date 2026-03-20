@@ -35,7 +35,7 @@ export function Navbar() {
     gsap.fromTo(
       navRef.current,
       { y: -100, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.2, delay: 0.3, ease: "power4.out" }
+      { y: 0, opacity: 1, duration: 1.2, delay: 0.3, ease: "power4.out" },
     );
   }, []);
 
@@ -51,23 +51,20 @@ export function Navbar() {
     <>
       <nav
         ref={navRef}
-        className={`fixed top-0 left-0 right-0 z-[90] transition-all duration-500 ${
-          scrolled
-            ? "py-3 glass border-b"
-            : "py-5"
+        className={`fixed top-0 left-0 right-0 z-90 transition-all duration-500 ${
+          scrolled ? "py-3 glass border-b" : "py-5"
         }`}
         style={{
           borderBottomColor: scrolled ? "rgba(200,146,15,0.1)" : "transparent",
         }}
       >
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex items-center justify-between">
+        <div className="max-w-350 mx-auto px-6 lg:px-12 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <div
               className="w-8 h-8 rounded-full flex items-center justify-center"
               style={{
-                background:
-                  "linear-gradient(135deg, #c8920f, #e4b020)",
+                background: "linear-gradient(135deg, #c8920f, #e4b020)",
               }}
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -153,7 +150,7 @@ export function Navbar() {
             animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
             exit={{ opacity: 0, clipPath: "inset(0 0 100% 0)" }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[85] flex flex-col justify-center"
+            className="fixed inset-0 z-85 flex flex-col justify-center"
             style={{ background: "rgba(2, 2, 10, 0.97)" }}
           >
             <div className="px-8 pt-24">
@@ -163,7 +160,10 @@ export function Navbar() {
                     key={href}
                     initial={{ opacity: 0, x: -40 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 + i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{
+                      delay: 0.1 + i * 0.07,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
                   >
                     <Link
                       href={href}
@@ -171,7 +171,10 @@ export function Navbar() {
                       className="text-4xl font-light"
                       style={{
                         fontFamily: "var(--font-cormorant)",
-                        color: pathname === href ? "#e4b020" : "rgba(240,240,242,0.7)",
+                        color:
+                          pathname === href
+                            ? "#e4b020"
+                            : "rgba(240,240,242,0.7)",
                       }}
                     >
                       {label}
@@ -186,7 +189,11 @@ export function Navbar() {
                 transition={{ delay: 0.5 }}
                 className="mt-12 flex gap-4"
               >
-                <MagneticButton variant="gold" size="md" onClick={() => setMenuOpen(false)}>
+                <MagneticButton
+                  variant="gold"
+                  size="md"
+                  onClick={() => setMenuOpen(false)}
+                >
                   Book Now
                 </MagneticButton>
               </motion.div>

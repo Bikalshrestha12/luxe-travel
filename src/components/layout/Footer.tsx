@@ -32,14 +32,16 @@ export function Footer() {
         background: "linear-gradient(to bottom, transparent, rgba(2,2,10,0.8))",
       }}
     >
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-20">
+      <div className="max-w-350 mx-auto px-6 lg:px-12 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 mb-16">
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
               <div
                 className="w-8 h-8 rounded-full flex items-center justify-center"
-                style={{ background: "linear-gradient(135deg, #c8920f, #e4b020)" }}
+                style={{
+                  background: "linear-gradient(135deg, #c8920f, #e4b020)",
+                }}
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M8 1L14 5V11L8 15L2 11V5L8 1Z" fill="#02020a" />

@@ -23,7 +23,7 @@ export function ScrollProgress() {
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 z-[100] h-[2px]"
+      className="fixed top-0 left-0 right-0 z-100 h-0.5"
       style={{ background: "rgba(200, 146, 15, 0.1)" }}
     >
       <div

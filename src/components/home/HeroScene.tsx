@@ -21,7 +21,8 @@ function Globe() {
   useFrame((state) => {
     if (meshRef.current) {
       meshRef.current.rotation.y += 0.003;
-      meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.05;
+      meshRef.current.rotation.x =
+        Math.sin(state.clock.elapsedTime * 0.2) * 0.05;
     }
     if (glowRef.current) {
       glowRef.current.rotation.y -= 0.002;
@@ -135,12 +136,14 @@ function ParticleField() {
         <bufferAttribute
           attach="attributes-position"
           array={positions}
+          args={[positions, 3]}
           count={count}
           itemSize={3}
         />
         <bufferAttribute
           attach="attributes-color"
           array={colors}
+          args={[positions, 3]}
           count={count}
           itemSize={3}
         />
@@ -254,11 +257,7 @@ function SceneLighting() {
       />
       <pointLight position={[-5, 3, -5]} intensity={0.8} color="#00d4ff" />
       <pointLight position={[5, -3, 5]} intensity={0.4} color="#7c3aed" />
-      <hemisphereLight
-        color="#c8920f"
-        groundColor="#00d4ff"
-        intensity={0.3}
-      />
+      <hemisphereLight color="#c8920f" groundColor="#00d4ff" intensity={0.3} />
     </>
   );
 }

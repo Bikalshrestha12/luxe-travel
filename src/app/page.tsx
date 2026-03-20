@@ -28,13 +28,13 @@ export default function HomePage() {
         style={{ background: "var(--obsidian)" }}
       >
         <div
-          className="absolute inset-0 z-[1] pointer-events-none"
+          className="absolute inset-0 z-1 pointer-events-none"
           style={{
             background:
               "radial-gradient(ellipse 80% 60% at 70% 50%, transparent 0%, rgba(2,2,10,0.6) 100%)",
           }}
         />
-        <div className="absolute inset-0 bg-grid opacity-30 z-[1] pointer-events-none" />
+        <div className="absolute inset-0 bg-grid opacity-30 z-1 pointer-events-none" />
         <HeroScene />
         <HeroOverlay />
       </section>
@@ -84,7 +84,7 @@ export default function HomePage() {
       <FeaturedDestinations />
 
       <section className="relative py-32">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+        <div className="max-w-350 mx-auto px-6 lg:px-12">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <div className="section-divider mb-4" />
@@ -235,7 +235,7 @@ export default function HomePage() {
       <StatsSection />
 
       <section className="relative py-24">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+        <div className="max-w-350 mx-auto px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}

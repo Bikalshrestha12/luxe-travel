@@ -31,13 +31,13 @@ export function HotelShowcase() {
           trigger: sectionRef.current,
           start: "top 75%",
         },
-      }
+      },
     );
   }, []);
 
   return (
     <section ref={sectionRef} className="py-32 px-6 lg:px-16">
-      <div className="max-w-[1400px] mx-auto">
+      <div className="max-w-350 mx-auto">
         <div className="flex items-end justify-between mb-16">
           <div>
             <span
@@ -52,7 +52,9 @@ export function HotelShowcase() {
             >
               Extraordinary
               <br />
-              <span className="text-gradient-gold italic">Hotels & Resorts</span>
+              <span className="text-gradient-gold italic">
+                Hotels & Resorts
+              </span>
             </h2>
           </div>
           <Link
@@ -61,7 +63,14 @@ export function HotelShowcase() {
             style={{ color: "var(--text-secondary)" }}
           >
             View all hotels
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
               <path d="M3 8h10M9 4l4 4-4 4" />
             </svg>
           </Link>
@@ -85,16 +94,23 @@ export function HotelShowcase() {
               />
               <div
                 className="absolute inset-0"
-                style={{ background: "linear-gradient(to top, rgba(2,2,10,0.85) 0%, transparent 60%)" }}
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(2,2,10,0.85) 0%, transparent 60%)",
+                }}
               />
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 style={{ background: "rgba(200,146,15,0.05)" }}
               />
               <div className="absolute top-5 left-5 flex gap-2">
                 <span className="tag">{featured[0].category}</span>
               </div>
               <div className="absolute bottom-0 p-8">
-                <p className="text-xs tracking-widest uppercase mb-2" style={{ color: "var(--gold)" }}>
+                <p
+                  className="text-xs tracking-widest uppercase mb-2"
+                  style={{ color: "var(--gold)" }}
+                >
                   {featured[0].destination}, {featured[0].country}
                 </p>
                 <h3
@@ -106,16 +122,28 @@ export function HotelShowcase() {
                 <div className="flex items-center justify-between">
                   <div className="flex gap-3">
                     {featured[0].amenities.slice(0, 3).map((a) => (
-                      <span key={a} className="text-xs" style={{ color: "var(--text-muted)" }}>
+                      <span
+                        key={a}
+                        className="text-xs"
+                        style={{ color: "var(--text-muted)" }}
+                      >
                         · {a}
                       </span>
                     ))}
                   </div>
                   <div>
-                    <span className="text-2xl font-light text-gradient-gold" style={{ fontFamily: "var(--font-cormorant)" }}>
+                    <span
+                      className="text-2xl font-light text-gradient-gold"
+                      style={{ fontFamily: "var(--font-cormorant)" }}
+                    >
                       ${featured[0].pricePerNight.toLocaleString()}
                     </span>
-                    <span className="text-xs ml-1" style={{ color: "var(--text-muted)" }}>/night</span>
+                    <span
+                      className="text-xs ml-1"
+                      style={{ color: "var(--text-muted)" }}
+                    >
+                      /night
+                    </span>
                   </div>
                 </div>
               </div>
@@ -140,7 +168,10 @@ export function HotelShowcase() {
                 />
                 <div
                   className="absolute inset-0"
-                  style={{ background: "linear-gradient(to top, rgba(2,2,10,0.8) 0%, transparent 60%)" }}
+                  style={{
+                    background:
+                      "linear-gradient(to top, rgba(2,2,10,0.8) 0%, transparent 60%)",
+                  }}
                 />
                 <div className="absolute top-4 left-4">
                   <span className="tag text-[10px]">{hotel.category}</span>
@@ -153,11 +184,18 @@ export function HotelShowcase() {
                     {hotel.name}
                   </h3>
                   <div className="flex items-center justify-between">
-                    <p className="text-xs" style={{ color: "var(--text-muted)" }}>
+                    <p
+                      className="text-xs"
+                      style={{ color: "var(--text-muted)" }}
+                    >
                       {hotel.destination}
                     </p>
-                    <span className="text-lg font-light text-gradient-gold" style={{ fontFamily: "var(--font-cormorant)" }}>
-                      ${hotel.pricePerNight.toLocaleString()}<span className="text-xs text-gray-500 ml-1">/night</span>
+                    <span
+                      className="text-lg font-light text-gradient-gold"
+                      style={{ fontFamily: "var(--font-cormorant)" }}
+                    >
+                      ${hotel.pricePerNight.toLocaleString()}
+                      <span className="text-xs text-gray-500 ml-1">/night</span>
                     </span>
                   </div>
                 </div>
