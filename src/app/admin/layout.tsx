@@ -81,9 +81,12 @@ function Sidebar({ collapsed, onCollapse, mobile, onClose }: {
     router.push("/login");
     onClose?.();
   };
+  useEffect(() => {
+  document.documentElement.classList.remove("lenis");
+}, []);
 
   return (
-    <div className="flex flex-col h-full" style={{ background: "var(--surface)", borderRight: "1px solid rgba(200,146,15,0.08)" }}>
+    <div className="flex flex-col h-full overflow-hidden min-h-0" style={{ background: "var(--surface)", borderRight: "1px solid rgba(200,146,15,0.08)" }}>
       {/* Logo / header */}
       <div className="flex items-center justify-between px-4 py-5 border-b" style={{ borderColor: "rgba(200,146,15,0.08)" }}>
         {!collapsed && (
@@ -127,7 +130,7 @@ function Sidebar({ collapsed, onCollapse, mobile, onClose }: {
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-6">
+      <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-6 min-h-0" data-lenis-prevent>
         {NAV_ITEMS.map(({ section, items }) => (
           <div key={section}>
             {!collapsed && (
@@ -209,7 +212,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <motion.div
         animate={{ width: collapsed ? 72 : 260 }}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        className="hidden lg:block flex-none overflow-hidden"
+        className="hidden lg:block flex-none overflow-hidden min-h-0"
         style={{ minHeight: "100vh" }}>
         <Sidebar collapsed={collapsed} onCollapse={() => setCollapsed(!collapsed)} />
       </motion.div>
@@ -231,7 +234,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </AnimatePresence>
 
       {/* Main content area */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden min-h-0">
         {/* Top bar */}
         <header className="flex-none flex items-center justify-between px-4 sm:px-6 py-4 border-b"
           style={{ borderColor: "rgba(200,146,15,0.08)", background: "rgba(14,14,30,0.8)", backdropFilter: "blur(20px)" }}>
@@ -279,7 +282,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </header>
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto" style={{ background: "var(--obsidian)" }}>
+        <main className="flex-1 overflow-y-auto min-h-0" style={{ background: "var(--obsidian)" }} data-lenis-prevent>
           <motion.div key={pathname} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }} className="h-full">
             {children}
